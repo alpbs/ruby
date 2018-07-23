@@ -68,13 +68,17 @@ module PagSeguro
 
       def serialize_creditor(data)
         data[:creditor_fees] = {
-          intermediation_rate_amount: BigDecimal(xml.css("creditorFees > intermediationRateAmount").text),
-          intermediation_fee_amount: BigDecimal(xml.css("creditorFees > intermediationFeeAmount").text),
-          installment_fee_amount: BigDecimal(xml.css("creditorFees > installmentFeeAmount").text),
-          operational_fee_amount: BigDecimal(xml.css("creditorFees > operationalFeeAmount").text),
-          commission_fee_amount: BigDecimal(xml.css("creditorFees > commissionFeeAmount").text),
-          efrete: BigDecimal(xml.css("creditorFees > efrete").text)
+          intermediation_rate_amount: serialize_big_decimal_values(xml.css("creditorFees > intermediationRateAmount").text),
+          intermediation_fee_amount: serialize_big_decimal_values(xml.css("creditorFees > intermediationFeeAmount").text),
+          installment_fee_amount: serialize_big_decimal_values(xml.css("creditorFees > installmentFeeAmount").text),
+          creditor_fees: serialize_big_decimal_values(xml.css("creditorFees > operationalFeeAmount").text)
+          commission_fee_amount: serialize_big_decimal_values(xml.css("creditorFees > commissionFeeAmount").text),
+          efrete: serialize_big_decimal_values(xml.css("creditorFees > efrete").text)
         }
+      end
+
+      def serialize_big_decimal_values(value)
+        value.present? ? BigDecimal(value) : BigDecimal(0)
       end
 
       def serialize_payments(data)
