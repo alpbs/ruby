@@ -72,7 +72,7 @@ module PagSeguro
           intermediation_fee_amount: serialize_big_decimal_values(xml.css("creditorFees > intermediationFeeAmount").text),
           installment_fee_amount: serialize_big_decimal_values(xml.css("creditorFees > installmentFeeAmount").text),
           operational_fee_amount: serialize_big_decimal_values(xml.css("creditorFees > operationalFeeAmount").text),
-          commission_fee_amount: serialize_big_decimal_values(xml.css("creditorFees > commissionFeeAmount"a).text),
+          commission_fee_amount: serialize_big_decimal_values(xml.css("creditorFees > commissionFeeAmount").text),
           efrete: serialize_big_decimal_values(xml.css("creditorFees > efrete").text)
         }
       end
